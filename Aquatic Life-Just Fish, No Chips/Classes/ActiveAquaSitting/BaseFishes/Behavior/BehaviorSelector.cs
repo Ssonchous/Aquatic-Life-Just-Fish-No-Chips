@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.Behavior
 {
@@ -26,7 +27,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public static IBehavior Choose(BaseFish fish, AquariumContent content)
         {
             BaseFishDecorator fishAsDecorator = fish as BaseFishDecorator;
-
+                
             //if (fish is BaseFish baseFish)
             //{
             //    // Пытаемся получить декораторы (если они есть)
@@ -49,17 +50,18 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                 LeaveSchoolFish(fishAsDecorator);
 
                 Food food = content.FindNearestFood(fish);
-                if (food != null) return new SeekingFoodBehavior(food, content.MaxPosition);
+                if (food != null) return new SeekingFoodBehavior(food, content.MaxPosition, (int)fish.Size.Height);
 
             // 2. Охота 
                 var hunter = fishAsDecorator?.GetDecorator<HunterDecorator>();
-                if (hunter != null && hunter.Hunger < 50)
+                if (hunter != null && fish.Hunger < 70)
                 {
-                   // MessageBox.Show("Может охотиться " + fish.Name);
-                    BaseFish prey = content.FindNearestPrey(hunter);
+                    //if (fish.Name == "barracuda")
+                    //    MessageBox.Show($"{fish.Name} — Голодает на 70 и охотится");
+                    BaseFish prey = content.FindNearestPrey(fish);
                     if (prey != null) {
-                        //MessageBox.Show("Врое как охотится " + fish.Name);
-                        return new HuntingBehavior(prey, content.MaxPosition); }
+
+                        return new HuntingBehavior(prey, content.MaxPosition, (int)fish.Size.Height); }
                 }
             }
 
@@ -70,7 +72,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             {
                 LeaveSchoolFish(fishAsDecorator);
                 //MessageBox.Show("Опья пасность"+ hunterDanger.Name);
-                return new FearsBehavior(hunterDanger, content.MaxPosition);
+                return new FearsBehavior(hunterDanger, content.MaxPosition, (int)fish.Size.Height);
             }
 
             // 4. Стайное поведение
@@ -101,7 +103,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Bubble bubble = content.FindNearestBubble(fish);
             if (fish.СurrentBehavior is PlayingBehavior)
                 return fish.СurrentBehavior;
-            if (bubble != null) return new PlayingBehavior(bubble, content.MaxPosition);
+            if (bubble != null) return new PlayingBehavior(bubble, content.MaxPosition, (int)fish.Size.Height);
 
             // 5. Дефолтное поведение
             return new IdleBehavior(content.MaxPosition);

@@ -21,11 +21,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
     {
         public Point MaxPosition { get; set; }
         protected IAquaSitting Target { get; set; }
-        protected double InteractionDistance = 10;
+        protected int InteractionDistance;
 
-        public TargetedBehavior(IAquaSitting target, Point maxPosition)
+        public TargetedBehavior(IAquaSitting target, Point maxPosition, int interactionDistance)
         {
             Target = target;
+            InteractionDistance = interactionDistance;
             MaxPosition = maxPosition;
         }
 

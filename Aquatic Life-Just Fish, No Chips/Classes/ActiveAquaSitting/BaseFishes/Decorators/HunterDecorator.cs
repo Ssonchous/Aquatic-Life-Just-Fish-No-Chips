@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Decorators
 {
@@ -17,10 +18,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Decorators
             BiteStrength = biteStrength;
         }
 
-        public void Bite(BaseFish prey)
+        public int Bite(BaseFish prey)
         {
             prey.Health -= BiteStrength;
-            this.Hunger += 30;
+            MessageBox.Show("Куси куси");
+            return BiteStrength;
+
         }
 
     }

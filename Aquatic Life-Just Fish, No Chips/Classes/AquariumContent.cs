@@ -73,8 +73,9 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes
 
         public BaseFish FindNearestPrey(BaseFish predator)
         {
-            List<BaseFish> fishesPrey = Fishes.Where(f => f != predator && f.Size.Width < predator.Size.Width / 1.5).ToList();
-            return FindNearestInRange(predator, fishesPrey);
+            List<BaseFish> fishesPrey = Fishes.Where(f => f != predator && f.Size.Width < predator.Size.Width / 1).ToList();
+            var fish=  FindNearestInRange(predator, fishesPrey);
+            return fish;
         }
 
         public BaseFish FindNearestHunter(BaseFish predator)

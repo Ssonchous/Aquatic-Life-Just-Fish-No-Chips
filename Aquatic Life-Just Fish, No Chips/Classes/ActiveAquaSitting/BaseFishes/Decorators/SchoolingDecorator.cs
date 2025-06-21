@@ -55,19 +55,19 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         public bool TryJoinSchool(SchoolingDecorator potentialLeader)
         {
-            if (potentialLeader.Leader != null)
-                return TryJoinSchool(potentialLeader.Leader);
+            //if (potentialLeader.Leader != null)
+            //    return TryJoinSchool(potentialLeader.Leader);
 
-            if (potentialLeader.schoolsCount >= MaxSchoolSize)
+            //if (potentialLeader.schoolsCount >= MaxSchoolSize)
                 return false;
 
-            else if (potentialLeader.schoolsCount == 0)
-                potentialLeader.IsLeader = true;
+            //else if (potentialLeader.schoolsCount == 0)
+            //    potentialLeader.IsLeader = true;
 
             
-            Leader = potentialLeader;
-            Leader.schoolsCount++;
-            return true;
+            //Leader = potentialLeader;
+            //Leader.schoolsCount++;
+            //return true;
         }
 
 

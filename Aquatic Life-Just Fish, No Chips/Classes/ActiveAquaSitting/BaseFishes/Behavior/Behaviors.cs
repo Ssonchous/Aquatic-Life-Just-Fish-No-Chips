@@ -13,7 +13,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 {
     public class SeekingFoodBehavior : TargetedBehavior
     {
-        public SeekingFoodBehavior(IAquaSitting target, Point maxPosition) : base(target, maxPosition) {}
+        public SeekingFoodBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance) {}
 
         public override void Interact(BaseFish fish)
         {
@@ -27,7 +27,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
     }
     public class HuntingBehavior : TargetedBehavior
     {
-        public HuntingBehavior(IAquaSitting target, Point maxPosition) : base(target, maxPosition) { }
+        public HuntingBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance) { }
 
         public override void Interact(BaseFish fish)
         {
@@ -35,7 +35,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
             if (hunter != null && Target is BaseFish prey )
             {
-                hunter.Bite(prey); 
+                fish.Hunger += hunter.Bite(prey); 
                 fish.СurrentBehavior = new IdleBehavior( MaxPosition);
             }
         }
@@ -43,7 +43,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
     public class FearsBehavior : TargetedBehavior
     {
-        public FearsBehavior(IAquaSitting target, Point maxPosition) : base(target, maxPosition) { }
+        public FearsBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance) { }
 
         public override void UpdateAngle(BaseFish fish)
         {
@@ -84,7 +84,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
     public class PlayingBehavior : TargetedBehavior
     {
         private int playTimeRemaining;
-        public PlayingBehavior(IAquaSitting target, Point maxPosition) : base(target, maxPosition) 
+        public PlayingBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance) 
         {
             playTimeRemaining = 50;
         }

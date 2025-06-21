@@ -11,11 +11,11 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 {
     public class BaseFishDecorator : BaseFish
     {
-        protected BaseFish wrappedFish;
+        public BaseFish WrappedFish;
 
         public BaseFishDecorator(BaseFish fish) : base(fish.Position)
         {
-            wrappedFish = fish;
+            WrappedFish = fish;
             // Копируем только начальные значения
             CopyFishState(fish, this);
         }
@@ -44,7 +44,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                 return decorator;
             }
 
-            if (wrappedFish is BaseFishDecorator innerDecorator)
+            if (WrappedFish is BaseFishDecorator innerDecorator)
             {
                 //MessageBox.Show(innerDecorator.Name+" " +innerDecorator.GetType().ToString());
                 return innerDecorator.GetDecorator<T>(); 

@@ -19,25 +19,25 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual Point Position { get; set; }
         public Size Size { get; set; }
         public ImageSource Image { get; set; }
-        private int health { get; set; } 
-        private int hunger { get; set; }
+        private double health { get; set; } 
+        private double hunger { get; set; }
         public virtual float VisionRange { get; set; }
         public virtual double CurrentAngle { get; set; }
         public virtual float Speed { get; set; } 
         public virtual IBehavior СurrentBehavior { get; set; }
 
-        public virtual int Hunger
+        public virtual double Hunger
         {
             get => hunger;
             set
             {
                 hunger = Bounds(value, 0, 100);
-                if (hunger == 0) Health--;
+                if (hunger == 0) Health -= 0.1 ;
                 else if (hunger > 50) Health++;
             }
         }
 
-        public virtual int Health
+        public virtual double Health
         {
             get { return health; }
             set
@@ -115,26 +115,14 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual void UpdateBehavior(AquariumContent content)
         {
             СurrentBehavior = BehaviorSelector.Choose(this, content);
+            //if (Name == "barracuda")
+            //    MessageBox.Show($"{Name} —  {СurrentBehavior}");
             СurrentBehavior.UpdateAngle(this);
         }
 
         public void IsHeadingToWall(Point maxPosition)
         {
-            double margin = 30; // Расстояние до стены
-            double nextX = Position.X + Math.Cos(CurrentAngle) * Speed;
-            double nextY = Position.Y + Math.Sin(CurrentAngle) * Speed;
 
-            // Проверяем каждую стенку
-            bool isNearLeft = nextX - Size.Width / 2 < margin;
-            bool isNearRight = nextX + Size.Width / 2 > maxPosition.X - margin;
-            bool isNearTop = nextY - Size.Height / 2 < margin;
-            bool isNearBottom = nextY + Size.Height / 2 > maxPosition.Y - margin;
-
-            if (isNearLeft || isNearRight || isNearTop || isNearBottom)
-            {
-                MessageBox.Show("Ну типа блять угол");
-                CurrentAngle += Math.PI + (random.NextDouble() - 0.5) * 0.5; // 25% случайности
-            }
 
         }
 
@@ -145,11 +133,79 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
 
         public virtual void UpdatePosition()
         {
-            if (IsAlive)
-                СurrentBehavior.Move(this);
+            Hunger-=0.01;
+            if (!IsAlive || СurrentBehavior == null) return;
+
+            // Сохраняем старую позицию
+            Point oldPos = Position;
+
+            // Двигаем рыбу
+            СurrentBehavior.Move(this);
+
+            // Применяем упрощённую обработку столкновений
+            HandleWallCollision(СurrentBehavior.MaxPosition);
+
+            // Если рыба не сдвинулась - экстренный разворот
+            if (Position == oldPos)
+            {
+                CurrentAngle += Math.PI / 2 + (random.NextDouble() - 0.5);
+                CurrentAngle = NormalizeAngle(CurrentAngle);
+            }
         }
 
-        public static int Bounds(int value, int min, int max)
+        public void HandleWallCollision(Point aquariumSize)
+        {
+            // Простые границы с отступом в половину размера рыбы
+            double leftBound = Size.Width / 2;
+            double rightBound = aquariumSize.X - Size.Width / 2;
+            double topBound = Size.Height / 2;
+            double bottomBound = aquariumSize.Y - Size.Height / 2;
+
+            // Принудительное ограничение позиции
+            Position = new Point(
+                Math.Max(leftBound, Math.Min(rightBound, Position.X)),
+                Math.Max(topBound, Math.Min(bottomBound, Position.Y))
+            );
+
+            // Проверяем столкновения и отражаем угол
+            bool needBounce = false;
+
+            if (Position.X <= leftBound || Position.X >= rightBound)
+            {
+                CurrentAngle = Math.PI - CurrentAngle; // Горизонтальное отражение
+                needBounce = true;
+            }
+
+            if (Position.Y <= topBound || Position.Y >= bottomBound)
+            {
+                CurrentAngle = -CurrentAngle; // Вертикальное отражение
+                needBounce = true;
+            }
+
+            if (needBounce)
+            {
+                // Добавляем небольшую случайность (5-10 градусов)
+                double angleVariation = (random.NextDouble() - 0.5) * Math.PI / 9;
+                CurrentAngle = NormalizeAngle(CurrentAngle + angleVariation);
+
+                // Слегка отталкиваем от стены
+                double pushDistance = Speed * 0.5;
+                Position = new Point(
+                    Position.X + Math.Cos(CurrentAngle) * pushDistance,
+                    Position.Y + Math.Sin(CurrentAngle) * pushDistance
+                );
+            }
+        }
+
+        private double NormalizeAngle(double angle)
+        {
+            angle %= (2 * Math.PI);
+            return angle < 0 ? angle + 2 * Math.PI : angle;
+        }
+
+
+
+        public static double Bounds(double value, double min, double max)
         {
             if (value < min) return min;
             if (value > max) return max;
