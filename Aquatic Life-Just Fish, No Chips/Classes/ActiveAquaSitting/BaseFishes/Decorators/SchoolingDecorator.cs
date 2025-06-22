@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.Behavior;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -12,9 +13,9 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
     public class SchoolingDecorator : BaseFishDecorator
     {
         public SchoolingDecorator Leader { get; private set; }
-        public bool IsLeader { get; set; }
-        private int schoolsCount = 0;
-        private int MaxSchoolSize = 5;
+        public bool IsLeader { get; private set; }
+        private int schoolsCount;
+        private int MaxSchoolSize;
         private double deviationAngle;
 
 
@@ -25,8 +26,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             MaxSchoolSize = maxSchoolSize;
 
         }
-
-
 
         //public bool TryJoinSchool(SchoolingDecorator potentialLeader)
         //{
@@ -55,28 +54,42 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         public bool TryJoinSchool(SchoolingDecorator potentialLeader)
         {
-            //if (potentialLeader.Leader != null)
-            //    return TryJoinSchool(potentialLeader.Leader);
-
-            //if (potentialLeader.schoolsCount >= MaxSchoolSize)
+            if (potentialLeader == this)
                 return false;
 
-            //else if (potentialLeader.schoolsCount == 0)
-            //    potentialLeader.IsLeader = true;
+            if (this.IsLeader)
+                return true;
 
-            
-            //Leader = potentialLeader;
-            //Leader.schoolsCount++;
-            //return true;
+            if (potentialLeader.Leader != null)
+                return TryJoinSchool(potentialLeader.Leader);
+
+            if (!(potentialLeader.СurrentBehavior is HuntingBehavior) && !(potentialLeader.СurrentBehavior is SeekingFoodBehavior) && !(potentialLeader.СurrentBehavior is FearsBehavior))
+            {
+                if (potentialLeader.IsLeader)
+                    if (potentialLeader.schoolsCount >= MaxSchoolSize)
+                        return false;
+                    else if (potentialLeader.schoolsCount == 0)
+                    {
+                        potentialLeader.IsLeader = true;
+                        potentialLeader.Leader = null;
+                    }
+
+                this.Leader = potentialLeader;
+                potentialLeader.schoolsCount++;
+
+                return true;
+            }
+            else
+                return false;
+
         }
 
 
 
         public bool CheckСorrectSchool()
         {
-            if (IsLeader || (Leader != null && Leader.IsLeader))        
-                return true; 
-            return false;
+            bool chack = IsLeader ^ (Leader != null && Leader.IsLeader);
+            return chack;
         }
 
         public void LeaveSchool()

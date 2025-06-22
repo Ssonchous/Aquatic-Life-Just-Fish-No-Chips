@@ -21,7 +21,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Decorators
         public int Bite(BaseFish prey)
         {
             prey.Health -= BiteStrength;
-            MessageBox.Show("Куси куси");
             return BiteStrength;
 
         }

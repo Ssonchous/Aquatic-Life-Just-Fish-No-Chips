@@ -24,15 +24,15 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Fishes
             if (Image == null) IsAlive = false;
         }
 
-        public static BaseFishDecorator Create(Point position, 
+        public static HunterDecorator Create(Point position, 
                                     int biteStrength = 40,
                                     int maxSchoolSize = 8)
         {
-            return new SchoolingDecorator(
-                new HunterDecorator(
+            return new HunterDecorator(
+                new SchoolingDecorator(
                     new Piranha(position),
-                biteStrength),
-                maxSchoolSize);
+                 maxSchoolSize ),
+                 biteStrength);
         }
     }
 }

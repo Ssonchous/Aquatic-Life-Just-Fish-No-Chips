@@ -23,13 +23,16 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Image = LoadImage("barracuda.png");
         }
 
-        public static SchoolingDecorator Create(Point position, int biteStrength = 45, int maxSchoolSize = 6)
+        public static HunterDecorator Create(Point position, int biteStrength = 45, int maxSchoolSize = 6)
         {
-            return new SchoolingDecorator(
-                new HunterDecorator(
-                    new Barracuda(position),
-                    biteStrength),
-                maxSchoolSize);
+            if (position == null)
+                throw new ArgumentNullException(nameof(position));
+
+            var barracuda = new Barracuda(position);
+            var schoolingDecorator = new SchoolingDecorator(barracuda, maxSchoolSize);
+            var hunterDecorator = new HunterDecorator(schoolingDecorator, biteStrength);
+
+            return hunterDecorator;
         }
     }
 }

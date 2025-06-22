@@ -89,7 +89,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes
 
         public List<BaseFish> FindNearestListFishBro(BaseFish fish)
         {
-            List<BaseFish> fishesBro = Fishes.Where(f => f.Name == fish.Name && f != fish).ToList();
+            var fishesBro = Fishes.Where(f => f.Name == fish.Name).ToList();
             return FindNearestListInRange(fish, fishesBro);
         }
     }

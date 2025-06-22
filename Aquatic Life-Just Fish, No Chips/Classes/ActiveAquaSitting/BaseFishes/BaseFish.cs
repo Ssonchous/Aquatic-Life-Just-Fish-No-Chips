@@ -19,25 +19,25 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual Point Position { get; set; }
         public Size Size { get; set; }
         public ImageSource Image { get; set; }
-        private double health { get; set; } 
-        private double hunger { get; set; }
+        private float health { get; set; } 
+        private float hunger { get; set; }
         public virtual float VisionRange { get; set; }
         public virtual double CurrentAngle { get; set; }
         public virtual float Speed { get; set; } 
         public virtual IBehavior СurrentBehavior { get; set; }
 
-        public virtual double Hunger
+        public virtual float Hunger
         {
             get => hunger;
             set
             {
                 hunger = Bounds(value, 0, 100);
-                if (hunger == 0) Health -= 0.1 ;
+                if (hunger == 0) Health -= 0.1f ;
                 else if (hunger > 50) Health++;
             }
         }
 
-        public virtual double Health
+        public virtual float Health
         {
             get { return health; }
             set
@@ -115,8 +115,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual void UpdateBehavior(AquariumContent content)
         {
             СurrentBehavior = BehaviorSelector.Choose(this, content);
-            //if (Name == "barracuda")
-            //    MessageBox.Show($"{Name} —  {СurrentBehavior}");
+            //if (Name == "piranha" && СurrentBehavior is SchoolingBehavior)
+            //    MessageBox.Show($"{Name} {Position.X} {Position.Y} —  {СurrentBehavior}");
             СurrentBehavior.UpdateAngle(this);
         }
 
@@ -133,7 +133,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
 
         public virtual void UpdatePosition()
         {
-            Hunger-=0.01;
+            Hunger-=0.01f;
             if (!IsAlive || СurrentBehavior == null) return;
 
             // Сохраняем старую позицию
@@ -205,7 +205,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
 
 
 
-        public static double Bounds(double value, double min, double max)
+        public static float Bounds(float value, float min, float max)
         {
             if (value < min) return min;
             if (value > max) return max;
