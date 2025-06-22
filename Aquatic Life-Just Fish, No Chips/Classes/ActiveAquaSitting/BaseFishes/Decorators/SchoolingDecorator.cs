@@ -68,11 +68,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                 if (potentialLeader.IsLeader)
                     if (potentialLeader.schoolsCount >= MaxSchoolSize)
                         return false;
-                    else if (potentialLeader.schoolsCount == 0)
-                    {
-                        potentialLeader.IsLeader = true;
-                        potentialLeader.Leader = null;
-                    }
+                    else { }
+                else if (potentialLeader.schoolsCount == 0)
+                {
+                    potentialLeader.IsLeader = true;
+                    potentialLeader.Leader = null;
+                }
 
                 this.Leader = potentialLeader;
                 potentialLeader.schoolsCount++;

@@ -89,13 +89,11 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                     if (listFishBro.Count > 0)
                         foreach (BaseFish potential in listFishBro)
                         {
-                            if (fish.Name == "piranha" && potential == fish)
-                                MessageBox.Show($"{fish.Name} {fish.Position.X} {fish.Position.Y}");
-                                var potentialLeader = (potential as BaseFishDecorator)?.GetDecorator<SchoolingDecorator>();
+                            var potentialLeader = (potential as BaseFishDecorator)?.GetDecorator<SchoolingDecorator>();
                             if (potentialLeader != null && potential != fish  && schooling.TryJoinSchool(potentialLeader))
                             {
-                                if (fish.Name == "piranha" )
-                                    MessageBox.Show($"{fish.Name} {fish.Position.X} {fish.Position.Y}");
+                                //if (fish.Name == "piranha" )
+                                //    MessageBox.Show($"{fish.Name} {fish.Position.X} {fish.Position.Y}");
                                 return new SchoolingBehavior(content.MaxPosition);
                             }
                         }
