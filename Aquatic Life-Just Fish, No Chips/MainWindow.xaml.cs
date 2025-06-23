@@ -70,6 +70,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips
 
             aquarium.ProcessGenericFish(Barracuda.Create(new Point(700, 500)));
             aquarium.ProcessGenericFish(Goldfish.Create(new Point(300, 300)));
+            aquarium.ProcessGenericFish(Goldfish.Create(new Point(700, 300)));
+            aquarium.ProcessGenericFish(Goldfish.Create(new Point(600, 500)));
             aquarium.ProcessGenericFish(Piranha.Create(new Point(400, 400)));
             aquarium.ProcessGenericFish(Angelfish.Create(new Point(500, 500)));
             aquarium.ProcessGenericFish(Piranha.Create(new Point(100, 100)));

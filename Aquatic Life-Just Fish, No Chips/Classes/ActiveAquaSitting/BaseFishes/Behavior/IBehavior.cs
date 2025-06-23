@@ -22,6 +22,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public Point MaxPosition { get; set; }
         protected IAquaSitting Target { get; set; }
         protected int InteractionDistance;
+        protected static Random random;
+
 
         public TargetedBehavior(IAquaSitting target, Point maxPosition, int interactionDistance)
         {
@@ -29,8 +31,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             InteractionDistance = interactionDistance;
             MaxPosition = maxPosition;
         }
+        static TargetedBehavior()
+        {
+            random = new Random();
+        }
 
-        
+
         public abstract void Interact(BaseFish fish);
 
         public virtual void UpdateAngle(BaseFish fish)

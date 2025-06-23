@@ -100,12 +100,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         public override void Interact(BaseFish fish)
         {
-            playTimeRemaining -= 1;
-
-            if (playTimeRemaining <= 0)
-            {
-                fish.СurrentBehavior = new IdleBehavior(MaxPosition);
-            }
+            fish.CurrentAngle += (random.NextDouble() - 0.5) * 0.2;  
         }
     }
 

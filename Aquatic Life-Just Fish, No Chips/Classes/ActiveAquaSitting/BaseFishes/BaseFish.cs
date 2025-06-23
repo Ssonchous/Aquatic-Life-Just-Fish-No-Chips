@@ -145,7 +145,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
             HandleWallCollision(СurrentBehavior.MaxPosition);
 
             // Если рыба не сдвинулась - экстренный разворот
-            if (Position == oldPos )
+            if (Position == oldPos && !(СurrentBehavior is PlayingBehavior))
             {
                 CurrentAngle += Math.PI / 2 + (random.NextDouble() - 0.5);
                 CurrentAngle = NormalizeAngle(CurrentAngle);
@@ -165,6 +165,15 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
                 Math.Max(leftBound, Math.Min(rightBound, Position.X)),
                 Math.Max(topBound, Math.Min(bottomBound, Position.Y))
             );
+            if (СurrentBehavior is SchoolingBehavior)
+            {            
+                var schoolingDecorator = (this as BaseFishDecorator)?.GetDecorator<SchoolingDecorator>();
+                if (schoolingDecorator != null)
+                {
+                    bool isLeader = schoolingDecorator.IsLeader;
+                    if (!isLeader) return;
+                }
+            }
 
             // Проверяем столкновения и отражаем угол
             bool needBounce = false;

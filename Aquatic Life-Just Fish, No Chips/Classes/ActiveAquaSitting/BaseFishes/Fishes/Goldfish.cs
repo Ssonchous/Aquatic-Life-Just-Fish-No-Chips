@@ -14,7 +14,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         private Goldfish(Point position) : base(position)
         {
             Name = "goldfish";
-            Size = new Size(150, 100);
+            Size = new Size(120, 90);
             Health = 90;
             Hunger = 40;
             VisionRange = 180;

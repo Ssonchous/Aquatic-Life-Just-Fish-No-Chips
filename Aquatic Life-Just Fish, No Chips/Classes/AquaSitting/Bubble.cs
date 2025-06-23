@@ -26,7 +26,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.AquaSitting
            );
             int rand = random.Next(60,90);
             Size = new Size(rand, rand);
-            riseSpeed = (float)Size.Width * 0.01f;
+            riseSpeed = (float)Size.Width * 0.02f;
             Image = LoadImage("bubble.png");
         }
 
