@@ -96,6 +96,16 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public virtual void UpdateAngle(BaseFish fish)
         {
             double randomAngleChange = (random.NextDouble() - 0.5) * 0.01;
+
+            double angleSin = Math.Abs(Math.Sin(fish.CurrentAngle));
+            bool singAngleTan = Math.Tan(fish.CurrentAngle) < 0;
+
+            if (angleSin > 0.95 && angleSin < 1)
+                if (singAngleTan)
+                    randomAngleChange =   0.5 * 0.01;
+                else
+                    randomAngleChange = - 0.5 * 0.01;
+
             fish.CurrentAngle += randomAngleChange;
             fish.IsHeadingToWall(MaxPosition);
         }

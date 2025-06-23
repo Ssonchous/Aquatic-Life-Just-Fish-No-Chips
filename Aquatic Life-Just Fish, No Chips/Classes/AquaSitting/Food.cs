@@ -24,7 +24,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.AquaSitting
         {
             MaxPosition = maxPosition;
             Position = new Point(
-               random.Next(0, (int)MaxPosition.X),
+               random.Next((int)(MaxPosition.X*0.1), (int)(MaxPosition.X * 0.9)),
                random.Next(50, (int)(MaxPosition.Y * 0.2))
            );
 

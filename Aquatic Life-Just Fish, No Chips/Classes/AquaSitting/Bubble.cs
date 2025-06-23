@@ -21,7 +21,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.AquaSitting
         public Bubble(Point MaxPosition)
         {
             Position = new Point(
-               random.Next(0, (int)MaxPosition.X),
+               random.Next((int)(MaxPosition.X * 0.1), (int)(MaxPosition.X * 0.9)),
                random.Next((int)(MaxPosition.Y * 0.5), (int)(MaxPosition.Y))
            );
             int rand = random.Next(60,90);

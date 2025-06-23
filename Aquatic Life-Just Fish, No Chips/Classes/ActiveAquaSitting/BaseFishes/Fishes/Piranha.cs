@@ -17,7 +17,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Fishes
             Size = new Size(180, 100);
             Health = 80;
             Hunger = 70;
-            VisionRange = 250;
+            VisionRange = 200;
             Speed = 3;
 
             Image = LoadImage("piranha.png");
