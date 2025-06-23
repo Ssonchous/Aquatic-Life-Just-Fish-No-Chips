@@ -47,20 +47,18 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             // 1. Проверка голода
             if (fish.Hunger < 70)
             {
-                LeaveSchoolFish(fishAsDecorator);
+                
 
                 Food food = content.FindNearestFood(fish);
-                if (food != null) return new SeekingFoodBehavior(food, content.MaxPosition, (int)fish.Size.Height);
+                if (food != null) return new SeekingFoodBehavior(food, content.MaxPosition, (int)fish.Size.Height/2);
 
             // 2. Охота 
                 var hunter = fishAsDecorator?.GetDecorator<HunterDecorator>();
                 if (hunter != null && fish.Hunger < 70)
                 {
-                    //if (fish.Name == "barracuda")
-                    //    MessageBox.Show($"{fish.Name} — Голодает на 70 и охотится");
                     BaseFish prey = content.FindNearestPrey(fish);
                     if (prey != null) {
-
+                        LeaveSchoolFish(fishAsDecorator);
                         return new HuntingBehavior(prey, content.MaxPosition, (int)fish.Size.Height); }
                 }
             }
@@ -71,7 +69,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             if (hunterDanger != null)
             {
                 LeaveSchoolFish(fishAsDecorator);
-                //MessageBox.Show("Опья пасность"+ hunterDanger.Name);
+                //if (fish.Name == "piranha" )
+                //    MessageBox.Show($"{fish.Name} {fish.Position.X} {fish.Position.Y}");
                 return new FearsBehavior(hunterDanger, content.MaxPosition, (int)fish.Size.Height);
             }
 
@@ -91,9 +90,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                         {
                             var potentialLeader = (potential as BaseFishDecorator)?.GetDecorator<SchoolingDecorator>();
                             if (potentialLeader != null && potential != fish  && schooling.TryJoinSchool(potentialLeader))
-                            {
-                                //if (fish.Name == "piranha" )
-                                //    MessageBox.Show($"{fish.Name} {fish.Position.X} {fish.Position.Y}");
+                            {        
+                                
                                 return new SchoolingBehavior(content.MaxPosition);
                             }
                         }
@@ -105,7 +103,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Bubble bubble = content.FindNearestBubble(fish);
             if (fish.СurrentBehavior is PlayingBehavior)
                 return fish.СurrentBehavior;
-            if (bubble != null) return new PlayingBehavior(bubble, content.MaxPosition, (int)fish.Size.Height);
+            if (bubble != null) return new PlayingBehavior(bubble, content.MaxPosition, (int)bubble.Size.Height/2);
 
             // 5. Дефолтное поведение
             return new IdleBehavior(content.MaxPosition);

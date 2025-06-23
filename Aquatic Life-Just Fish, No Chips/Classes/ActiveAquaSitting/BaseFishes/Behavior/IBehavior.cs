@@ -94,6 +94,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             fish.IsHeadingToWall(MaxPosition);
         }
 
+        public virtual void UpdateAngle(BaseFish fish, double angle)
+        {
+            fish.CurrentAngle = angle;
+            fish.IsHeadingToWall(MaxPosition);
+        }
+
         public void Move(BaseFish fish)
         {
             fish.Position = new Point(

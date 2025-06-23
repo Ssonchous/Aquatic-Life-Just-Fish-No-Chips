@@ -1,5 +1,4 @@
-﻿
-using Aquatic_Life_Just_Fish__No_Chips.Classes;
+﻿using Aquatic_Life_Just_Fish__No_Chips.Classes;
 using Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes;
 using Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.Behavior;
 using Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.Decorators;
@@ -74,6 +73,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips
             aquarium.ProcessGenericFish(Piranha.Create(new Point(400, 400)));
             aquarium.ProcessGenericFish(Angelfish.Create(new Point(500, 500)));
             aquarium.ProcessGenericFish(Piranha.Create(new Point(100, 100)));
+            for (int i = 0; i < 5; i++)
+            {
+                aquarium.AddFood();
+                aquarium.AddBubble();
+
+            }
 
 
             
@@ -112,6 +117,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips
             // Обновляем аквариум
             aquarium.Update();
 
+            
             // Отрисовываем всех обитателей
             foreach (var obj in aquarium.Contents)
             {
@@ -129,6 +135,36 @@ namespace Aquatic_Life_Just_Fish__No_Chips
                     Canvas.SetTop(fishImage, fish.Position.Y - fish.Size.Height / 2);
 
                     MainCanvas.Children.Add(fishImage);
+                }
+
+                // Отрисовываем корм
+                if (obj is Food food)
+                {
+                    var foodImage = new Image
+                    {
+                        Source = food.Image,
+                        Width = food.Size.Width,
+                        Height = food.Size.Height
+                    };
+
+                    Canvas.SetLeft(foodImage, food.Position.X - food.Size.Width / 2);
+                    Canvas.SetTop(foodImage, food.Position.Y - food.Size.Height / 2);
+                    MainCanvas.Children.Add(foodImage);
+                }
+
+                // Отрисовываем пузыри
+                if (obj is Bubble bubble)
+                {
+                    var bubbleImage = new Image
+                    {
+                        Source = bubble.Image,
+                        Width = bubble.Size.Width,
+                        Height = bubble.Size.Height
+                    };
+
+                    Canvas.SetLeft(bubbleImage, bubble.Position.X - bubble.Size.Width / 2);
+                    Canvas.SetTop(bubbleImage, bubble.Position.Y - bubble.Size.Height / 2);
+                    MainCanvas.Children.Add(bubbleImage);
                 }
 
             }
@@ -149,25 +185,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips
 
         private void buttonDel_Click(object sender, RoutedEventArgs e)
         {
-            BaseFish piranha = Piranha.Create(new Point(100, 100));
-
-
-            MessageBox.Show("Ошибка: Изображение не загружено");
-
-            var fishAsDecorator = piranha as BaseFishDecorator;
-            var hunter = fishAsDecorator?.GetDecorator<HunterDecorator>();
-            var schooling = fishAsDecorator?.GetDecorator<SchoolingDecorator>();
-
-
-
-            var testWindow = new Window
-            {
-                Title = "Тест изображения пираньи",
-                Content = new Image { Source = piranha.Image, Stretch = Stretch.Uniform },
-                Width = 300,
-                Height = 300
-            };
-            testWindow.ShowDialog();
 
         }
     }

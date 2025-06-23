@@ -21,7 +21,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         public SchoolingDecorator(BaseFish fish, int maxSchoolSize) : base(fish)
         {
-            deviationAngle = new Random().NextDouble() * 0.5 - 0.25;
+            deviationAngle = new Random().NextDouble() * 0.2 - 0.1;
             schoolsCount = 0;
             MaxSchoolSize = maxSchoolSize;
 
@@ -63,7 +63,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             if (potentialLeader.Leader != null)
                 return TryJoinSchool(potentialLeader.Leader);
 
-            if (!(potentialLeader.СurrentBehavior is HuntingBehavior) && !(potentialLeader.СurrentBehavior is SeekingFoodBehavior) && !(potentialLeader.СurrentBehavior is FearsBehavior))
+            if (!(potentialLeader.СurrentBehavior is HuntingBehavior) && !(potentialLeader.СurrentBehavior is SeekingFoodBehavior) && !(potentialLeader.СurrentBehavior is FearsBehavior) )
             {
                 if (potentialLeader.IsLeader)
                     if (potentialLeader.schoolsCount >= MaxSchoolSize)
@@ -89,8 +89,11 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         public bool CheckСorrectSchool()
         {
-            bool chack = IsLeader ^ (Leader != null && Leader.IsLeader);
-            return chack;
+            if (IsLeader && schoolsCount > 0)
+                return true;
+            if (Leader != null && Leader.IsLeader)
+                return true;
+            return false;
         }
 
         public void LeaveSchool()
@@ -104,12 +107,13 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             schoolsCount = 0;
         }
 
-        public void UpdateSchoolingAngle()
+        public double GetSchoolingAngle()
         {
             if (Leader != null)
             {
-                this.CurrentAngle = Leader.CurrentAngle + deviationAngle;
+                return Leader.CurrentAngle + deviationAngle;
             }
+            else return this.CurrentAngle;
         }
 
     }

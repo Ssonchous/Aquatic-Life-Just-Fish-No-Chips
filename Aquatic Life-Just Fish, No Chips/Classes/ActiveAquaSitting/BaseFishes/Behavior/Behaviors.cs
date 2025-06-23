@@ -72,8 +72,17 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         {
             var schooling = (fish as BaseFishDecorator)?.GetDecorator<SchoolingDecorator>();
             if (schooling == null) return;
-            if (schooling.Leader != null)
-                schooling.UpdateSchoolingAngle();
+            if (schooling.Leader != null && schooling.Leader.IsLeader)
+                base.UpdateAngle(fish, schooling.GetSchoolingAngle());
+            else if (schooling.IsLeader)
+            {
+                base.UpdateAngle(fish);
+            }
+            else {
+                fish.СurrentBehavior = new IdleBehavior(MaxPosition);
+                base.UpdateAngle(fish);
+            }
+            
             if (schooling.IsLeader)
             {
                 base.UpdateAngle(fish);

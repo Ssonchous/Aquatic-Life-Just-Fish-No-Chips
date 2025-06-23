@@ -24,14 +24,14 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes
             MaxPosition = maxPosition;
 
         }
-        public void AddFood(Point position)
+        public void AddFood()
         {
-            Contents.Add(new Food(position, MaxPosition));
+            Contents.Add(new Food(MaxPosition));
         }
 
-        public void AddBubble(Point position)
+        public void AddBubble()
         {
-            Contents.Add(new Bubble(position));
+            Contents.Add(new Bubble(MaxPosition));
         }
 
         public void ProcessGenericFish(BaseFish fish) 

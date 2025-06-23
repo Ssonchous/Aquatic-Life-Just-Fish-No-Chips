@@ -33,7 +33,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
             {
                 hunger = Bounds(value, 0, 100);
                 if (hunger == 0) Health -= 0.1f ;
-                else if (hunger > 50) Health++;
+                else if (hunger > 50) Health+= 0.1f;
             }
         }
 
@@ -142,11 +142,10 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
             // Двигаем рыбу
             СurrentBehavior.Move(this);
 
-            // Применяем упрощённую обработку столкновений
             HandleWallCollision(СurrentBehavior.MaxPosition);
 
             // Если рыба не сдвинулась - экстренный разворот
-            if (Position == oldPos)
+            if (Position == oldPos )
             {
                 CurrentAngle += Math.PI / 2 + (random.NextDouble() - 0.5);
                 CurrentAngle = NormalizeAngle(CurrentAngle);

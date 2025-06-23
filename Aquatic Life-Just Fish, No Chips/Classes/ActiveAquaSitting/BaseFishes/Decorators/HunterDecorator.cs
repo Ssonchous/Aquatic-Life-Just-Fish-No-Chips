@@ -20,8 +20,9 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Decorators
 
         public int Bite(BaseFish prey)
         {
+            int sut = (int)Math.Min(BiteStrength, prey.Health);
             prey.Health -= BiteStrength;
-            return BiteStrength;
+            return sut;
 
         }
 
