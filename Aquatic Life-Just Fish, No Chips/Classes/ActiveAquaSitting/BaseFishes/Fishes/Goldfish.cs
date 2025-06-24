@@ -22,7 +22,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Image = LoadImage("goldfish.png");
         }
 
-        public static BaseFish Create(Point position, int maxSchoolSize = 10)
+        public static BaseFish Create(Point position, int maxSchoolSize = 5)
         {
             return new SchoolingDecorator(
                 new Goldfish(position),

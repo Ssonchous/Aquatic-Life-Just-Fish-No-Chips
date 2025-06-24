@@ -28,7 +28,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.AquaSitting
                random.Next(50, (int)(MaxPosition.Y * 0.2))
            );
 
-            int rand = random.Next(20, 60);
+            int rand = random.Next(20, 50);
             Size = new Size(rand, rand);
             fallSpeed = (float)Size.Width * 0.01f;
             Image = LoadImage("food.png");

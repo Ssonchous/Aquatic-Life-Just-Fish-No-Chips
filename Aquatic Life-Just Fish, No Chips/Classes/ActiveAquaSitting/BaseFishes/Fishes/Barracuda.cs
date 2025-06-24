@@ -15,7 +15,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         private Barracuda(Point position) : base(position)
         {
             Name = "barracuda";
-            Size = new Size(400, 200);
+            Size = new Size(350, 200);
             Health = 60;
             Hunger = 50;
             VisionRange = 500;
@@ -23,7 +23,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Image = LoadImage("barracuda.png");
         }
 
-        public static HunterDecorator Create(Point position, int biteStrength = 45, int maxSchoolSize = 6)
+        public static HunterDecorator Create(Point position, int biteStrength = 45, int maxSchoolSize = 2)
         {
             if (position == null)
                 throw new ArgumentNullException(nameof(position));

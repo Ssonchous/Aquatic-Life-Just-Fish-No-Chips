@@ -14,7 +14,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         private Shark(Point position) : base(position)
         {
             Name = "shark";
-            Size = new Size(120, 60);
+            Size = new Size(400, 200);
             Health = 150;
             Hunger = 60;
             VisionRange = 300;

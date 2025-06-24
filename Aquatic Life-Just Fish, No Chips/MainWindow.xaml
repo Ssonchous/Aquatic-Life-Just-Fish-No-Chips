@@ -5,7 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Aquarium" 
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="600" Width="800"
         MouseDown="Window_MouseDown"
         KeyDown="Window_KeyDown">
-    <Canvas x:Name="MainCanvas" Background="Transparent"/>
+    
+    <Window.Resources>
+        <Style x:Key="MenuItemButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <Canvas x:Name="MainCanvas" Background="Transparent"/>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel x:Name="FishSettingsMenu" 
+                        Grid.Column="0"
+                        Orientation="Vertical" 
+                        Background="#88000000"  
+                        Width="150" 
+                        Margin="0 35 5 0"
+                        Visibility="Collapsed">
+            </StackPanel>
+
+            <!-- Основное меню (справа) -->
+            <StackPanel Grid.Column="1">
+                <!-- Кнопка меню -->
+                <Button x:Name="MenuButton" Content="≡" 
+                        Width="30" Height="30" 
+                        FontSize="16" 
+                        Background="#88000000"  
+                        Foreground="White"
+                        HorizontalAlignment="Right"
+                        BorderBrush="Transparent"
+                        Click="MenuButton_Click"/>
+
+                <!-- Основное выпадающее меню -->
+                <StackPanel x:Name="DropdownMenu" 
+                            Orientation="Vertical" 
+                            Background="#88000000"  
+                            Width="150" 
+                            Margin="0 5 0 0"
+                            Visibility="Collapsed">
+                    <Button Content="Добавить рыб" Style="{StaticResource MenuItemButton}" Click="AddFishButton_Click"/>
+                    <Button Content="Добавить корм" Style="{StaticResource MenuItemButton}"  Click="AddFoodButton_Click"/>
+                    <Button Content="Добавить воздух" Style="{StaticResource MenuItemButton}" Click="AddBubbleButton_Click"/>
+                    <Button Content="Выход" Style="{StaticResource MenuItemButton}" Click="ExitButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+
 </Window>

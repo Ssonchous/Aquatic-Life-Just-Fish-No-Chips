@@ -26,7 +26,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.Fishes
 
         public static HunterDecorator Create(Point position, 
                                     int biteStrength = 40,
-                                    int maxSchoolSize = 8)
+                                    int maxSchoolSize = 3)
         {
             return new HunterDecorator(
                 new SchoolingDecorator(

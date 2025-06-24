@@ -19,8 +19,9 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual Point Position { get; set; }
         public Size Size { get; set; }
         public ImageSource Image { get; set; }
-        private float health { get; set; } 
-        private float hunger { get; set; }
+        private float health;
+        private float hunger;
+        private float goodMood;
         public virtual float VisionRange { get; set; }
         public virtual double CurrentAngle { get; set; }
         public virtual float Speed { get; set; } 
@@ -47,11 +48,21 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
             }
         }
 
+        public virtual float GoodMood
+        {
+            get { return health; }
+            set
+            {
+                goodMood = Bounds(value, 0, 100);
+            }
+        }
+
 
         public BaseFish(Point position)
         {
             Position = position;
             Size = new Size(100,50);
+            GoodMood = 100;
 
             IsAlive = true;
             Health = 100;
@@ -134,6 +145,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual void UpdatePosition()
         {
             Hunger-=0.01f;
+            GoodMood -= 0.05f;
             if (!IsAlive || СurrentBehavior == null) return;
 
             // Сохраняем старую позицию

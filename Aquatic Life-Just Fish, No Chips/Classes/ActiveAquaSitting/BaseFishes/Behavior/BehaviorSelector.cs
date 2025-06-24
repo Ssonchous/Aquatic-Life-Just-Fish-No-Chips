@@ -101,7 +101,8 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
             // 5. Игра с пузырями
             Bubble bubble = content.FindNearestBubble(fish);
-            if (bubble != null) return new PlayingBehavior(bubble, content.MaxPosition, (int)bubble.Size.Height/2);
+            if (bubble != null && fish.GoodMood < 50) 
+                return new PlayingBehavior(bubble, content.MaxPosition, (int)bubble.Size.Height/2);
 
             // 5. Дефолтное поведение
             return new IdleBehavior(content.MaxPosition);

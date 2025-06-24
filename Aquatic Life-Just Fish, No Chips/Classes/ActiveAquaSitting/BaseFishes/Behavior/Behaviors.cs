@@ -92,15 +92,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
     public class PlayingBehavior : TargetedBehavior
     {
-        private int playTimeRemaining;
-        public PlayingBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance) 
-        {
-            playTimeRemaining = 50;
-        }
+        public PlayingBehavior(IAquaSitting target, Point maxPosition, int interactionDistance) : base(target, maxPosition, interactionDistance)  {}
 
         public override void Interact(BaseFish fish)
         {
-            fish.CurrentAngle += (random.NextDouble() - 0.5) * 0.2;  
+            fish.GoodMood += 0.08f;
+            fish.CurrentAngle += (random.NextDouble() - 0.5) * 0.2; 
         }
     }
 

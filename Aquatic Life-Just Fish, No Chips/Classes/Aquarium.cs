@@ -34,9 +34,15 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes
             Contents.Add(new Bubble(MaxPosition));
         }
 
-        public void ProcessGenericFish(BaseFish fish) 
+        public void AddFish(BaseFish fish) 
         {
-            Contents.Add(fish);
+            int count = (int)Math.Max(MaxPosition.X / 100, MaxPosition.Y / 100);
+            int currentFishCount = Contents.OfType<BaseFish>().Count();
+
+            if (currentFishCount < count)
+                Contents.Add(fish);
+            else
+                MessageBox.Show("Пока нельзя добавить, слишком много рыбок");
         }
 
         public void Update()

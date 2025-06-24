@@ -40,14 +40,14 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public override bool IsAlive
         {
             get => base.IsAlive;
-            set { base.IsAlive = value; if (wrappedFish != null) // ← Вот это!
+            set { base.IsAlive = value; if (wrappedFish != null)
                     wrappedFish.IsAlive = value;
             }
         }
         public override Point Position
         {
             get => base.Position;
-            set { base.Position = value; if (wrappedFish != null) // ← Вот это!
+            set { base.Position = value; if (wrappedFish != null) 
                     wrappedFish.Position = value;
             }
         }
@@ -55,7 +55,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public override float Health
         {
             get => base.Health;
-            set { base.Health = value; if (wrappedFish != null) // ← Вот это!
+            set { base.Health = value; if (wrappedFish != null) 
                     wrappedFish.Health = value;
             }
         }
@@ -63,14 +63,26 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public override float Hunger
         {
             get => base.Hunger;
-            set { base.Hunger = value; if (wrappedFish != null) // ← Вот это!
+            set { base.Hunger = value; if (wrappedFish != null)
                     wrappedFish.Hunger = value;
             }
         }
+
+        public virtual float GoodMood
+        {
+            get => base.GoodMood;
+            set
+            {
+                base.GoodMood = value; if (wrappedFish != null)
+                    wrappedFish.GoodMood = value;
+            }
+        }
+
+
         public override float VisionRange
         {
             get => base.VisionRange;
-            set { base.VisionRange = value; if (wrappedFish != null) // ← Вот это!
+            set { base.VisionRange = value; if (wrappedFish != null) 
                     wrappedFish.VisionRange = value;
             }
         }
