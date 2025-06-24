@@ -75,7 +75,6 @@
     <Compile Include="Classes\ActiveAquaSitting\BaseFishes\Fishes\Barracuda.cs" />
     <Compile Include="Classes\ActiveAquaSitting\BaseFishes\Fishes\Goldfish.cs" />
     <Compile Include="Classes\ActiveAquaSitting\BaseFishes\Fishes\Piranha.cs" />
-    <Compile Include="Classes\ActiveAquaSitting\BaseFishes\Fishes\Shark.cs" />
     <Compile Include="Classes\ActiveAquaSitting\IActiveAquaSitting.cs" />
     <Compile Include="Classes\Aquarium.cs" />
     <Compile Include="Classes\AquariumContent.cs" />

@@ -39,8 +39,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips
             Angelfish = 1,
             Barracuda,
             Goldfish,
-            Piranha,
-            Shark
+            Piranha
         }
         public MainWindow()
         {
@@ -202,9 +201,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips
                 case FishClasses.Piranha:
                     newFish = Piranha.Create(new Point(x, y));
                     break;
-                case FishClasses.Shark:
-                    newFish = Shark.Create(new Point(x, y));
-                    return;
             }
             aquarium.AddFish(newFish);
         }
