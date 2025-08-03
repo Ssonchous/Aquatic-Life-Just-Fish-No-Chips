@@ -51,7 +51,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             {
                 fish.СurrentBehavior = new IdleBehavior(MaxPosition);
             }
-            fish.IsHeadingToWall(MaxPosition);
         }
 
         public void Move(BaseFish fish)
@@ -107,13 +106,11 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                     randomAngleChange = - 0.5 * 0.01;
 
             fish.CurrentAngle += randomAngleChange;
-            fish.IsHeadingToWall(MaxPosition);
         }
 
         public virtual void UpdateAngle(BaseFish fish, double angle)
         {
             fish.CurrentAngle = angle;
-            fish.IsHeadingToWall(MaxPosition);
         }
 
         public void Move(BaseFish fish)

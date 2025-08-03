@@ -50,7 +50,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
 
         public virtual float GoodMood
         {
-            get { return health; }
+            get { return goodMood; }
             set
             {
                 goodMood = Bounds(value, 0, 100);
@@ -62,7 +62,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         {
             Position = position;
             Size = new Size(100,50);
-            GoodMood = 100;
+            GoodMood = 80;
 
             IsAlive = true;
             Health = 100;
@@ -78,6 +78,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         {
             Position = position;
             Size = size;
+            GoodMood = 80;
 
             IsAlive = true;
             Health = 100;
@@ -126,20 +127,12 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
         public virtual void UpdateBehavior(AquariumContent content)
         {
             СurrentBehavior = BehaviorSelector.Choose(this, content);
-            //if (Name == "piranha" && СurrentBehavior is SchoolingBehavior)
-            //    MessageBox.Show($"{Name} {Position.X} {Position.Y} —  {СurrentBehavior}");
             СurrentBehavior.UpdateAngle(this);
-        }
-
-        public void IsHeadingToWall(Point maxPosition)
-        {
-
-
         }
 
         public virtual T GetDecorator<T>() where T : BaseFishDecorator
         {
-            return null; // Для обычных рыб возвращаем null
+            return null; 
         }
 
         public virtual void UpdatePosition()
@@ -147,32 +140,18 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
             Hunger-=0.01f;
             GoodMood -= 0.05f;
             if (!IsAlive || СurrentBehavior == null) return;
-
-            // Сохраняем старую позицию
-            Point oldPos = Position;
-
-            // Двигаем рыбу
             СurrentBehavior.Move(this);
 
             HandleWallCollision(СurrentBehavior.MaxPosition);
-
-            // Если рыба не сдвинулась - экстренный разворот
-            if (Position == oldPos && !(СurrentBehavior is PlayingBehavior))
-            {
-                CurrentAngle += Math.PI / 2 + (random.NextDouble() - 0.5);
-                CurrentAngle = NormalizeAngle(CurrentAngle);
-            }
         }
 
         public void HandleWallCollision(Point aquariumSize)
         {
-            // Простые границы с отступом в половину размера рыбы
             double leftBound = Size.Width / 2;
             double rightBound = aquariumSize.X - Size.Width / 2;
             double topBound = Size.Height / 2;
             double bottomBound = aquariumSize.Y - Size.Height / 2;
 
-            // Принудительное ограничение позиции
             Position = new Point(
                 Math.Max(leftBound, Math.Min(rightBound, Position.X)),
                 Math.Max(topBound, Math.Min(bottomBound, Position.Y))
@@ -187,7 +166,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
                 }
             }
 
-            // Проверяем столкновения и отражаем угол
             bool needBounce = false;
 
             if (Position.X <= leftBound || Position.X >= rightBound)
@@ -204,11 +182,9 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes
 
             if (needBounce)
             {
-                // Добавляем небольшую случайность (5-10 градусов)
-                double angleVariation = (random.NextDouble() - 0.5) * Math.PI / 9;
+                double angleVariation = (random.NextDouble() - 0.5) * Math.PI / 9; //+-20
                 CurrentAngle = NormalizeAngle(CurrentAngle + angleVariation);
 
-                // Слегка отталкиваем от стены
                 double pushDistance = Speed * 0.5;
                 Position = new Point(
                     Position.X + Math.Cos(CurrentAngle) * pushDistance,

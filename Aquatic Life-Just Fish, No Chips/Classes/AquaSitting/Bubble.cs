@@ -39,7 +39,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.AquaSitting
 
         protected ImageSource LoadImage(string imageFileName)
         {
-            // Путь к папке с изображениями
+            // Путь к папке
             string imagesFolder = System.IO.Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
                 "Img", "Other");

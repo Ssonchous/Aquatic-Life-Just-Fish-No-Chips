@@ -50,7 +50,10 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
                 
 
                 Food food = content.FindNearestFood(fish);
-                if (food != null) return new SeekingFoodBehavior(food, content.MaxPosition, (int)fish.Size.Height/2);
+                if (food != null) {
+                    LeaveSchoolFish(fishAsDecorator);
+                    return new SeekingFoodBehavior(food, content.MaxPosition, (int)fish.Size.Height / 2); 
+                }
 
             // 2. Охота 
                 var hunter = fishAsDecorator?.GetDecorator<HunterDecorator>();

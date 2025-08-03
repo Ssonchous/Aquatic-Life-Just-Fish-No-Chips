@@ -17,24 +17,22 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public BaseFishDecorator(BaseFish fish) : base(fish.Position)
         {
             wrappedFish = fish;
-            // Копируем только начальные значения
+
             CopyFishState(fish, this);
         }
 
-        // Метод для копирования состояния между рыбами
         private void CopyFishState(BaseFish source, BaseFish target)
         {
             target.Name = source.Name;
             target.Image = source.Image;
             target.Size = source.Size;
             target.VisionRange = source.VisionRange;
+            target.GoodMood= source.GoodMood;
             target.Speed = source.Speed;
             target.IsAlive = source.IsAlive;
             target.Health = source.Health;
             target.Hunger = source.Hunger;
-            target.CurrentAngle = source.CurrentAngle;
             Position = source.Position;
-            target.СurrentBehavior = source.СurrentBehavior;
         }
 
         public override bool IsAlive
@@ -68,7 +66,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             }
         }
 
-        public virtual float GoodMood
+        public override float GoodMood
         {
             get => base.GoodMood;
             set

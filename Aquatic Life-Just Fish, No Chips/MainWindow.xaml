@@ -9,7 +9,6 @@
         AllowsTransparency="True"
         Background="Transparent"
         Height="600" Width="800"
-        MouseDown="Window_MouseDown"
         KeyDown="Window_KeyDown">
     
     <Window.Resources>

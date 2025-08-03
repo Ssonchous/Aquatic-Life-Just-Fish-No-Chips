@@ -18,7 +18,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Size = new Size(350, 200);
             Health = 60;
             Hunger = 50;
-            VisionRange = 500;
+            VisionRange = 400;
             Speed = 3;
             Image = LoadImage("barracuda.png");
         }

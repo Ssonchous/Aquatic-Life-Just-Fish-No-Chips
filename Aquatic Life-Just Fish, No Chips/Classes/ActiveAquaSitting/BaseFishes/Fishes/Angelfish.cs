@@ -16,7 +16,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
             Size = new Size(200, 200); 
             Health = 85;
             Hunger = 30;
-            VisionRange = 500;
+            VisionRange = 300;
             Speed = 1.5f;
             Image = LoadImage("angelfish.png");
         }

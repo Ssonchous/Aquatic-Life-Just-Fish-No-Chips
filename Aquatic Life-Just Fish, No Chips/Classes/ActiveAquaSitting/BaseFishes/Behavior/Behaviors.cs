@@ -97,7 +97,7 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
         public override void Interact(BaseFish fish)
         {
             fish.GoodMood += 0.08f;
-            fish.CurrentAngle += (random.NextDouble() - 0.5) * 0.2; 
+            fish.CurrentAngle += (random.NextDouble() - 0.5) * 0.1; 
         }
     }
 

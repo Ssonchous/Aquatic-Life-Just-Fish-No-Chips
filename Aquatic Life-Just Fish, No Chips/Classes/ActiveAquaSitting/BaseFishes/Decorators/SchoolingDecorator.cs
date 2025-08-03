@@ -27,31 +27,6 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes.ActiveAquaSitting.BaseFishes.
 
         }
 
-        //public bool TryJoinSchool(SchoolingDecorator potentialLeader)
-        //{
-        //    var currentLeader = potentialLeader;
-        //    while (!currentLeader.Leader != null || currentLeader.Leader != this)
-        //    {
-        //        currentLeader = currentLeader.Leader;
-
-        //        if (currentLeader == potentialLeader)
-        //            return false;
-        //    }
-
-        //    // Проверяем, не пытаемся ли присоединиться к себе
-        //    if (currentLeader == this)
-        //        return false;
-
-        //    // Проверяем размер стаи
-        //    if (currentLeader.schoolsCount >= MaxSchoolSize)
-        //        return false;
-
-        //    // Устанавливаем лидера
-        //    Leader = currentLeader;
-        //    Leader.schoolsCount++;
-        //    return true;
-        //}
-
         public bool TryJoinSchool(SchoolingDecorator potentialLeader)
         {
             if (potentialLeader == this)

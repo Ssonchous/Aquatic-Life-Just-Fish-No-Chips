@@ -40,9 +40,11 @@ namespace Aquatic_Life_Just_Fish__No_Chips.Classes
             int currentFishCount = Contents.OfType<BaseFish>().Count();
 
             if (currentFishCount < count)
-                Contents.Add(fish);
+                if (fish.Image != null)
+                    Contents.Add(fish);
+                else { }
             else
-                MessageBox.Show("Пока нельзя добавить, слишком много рыбок");
+                    MessageBox.Show("Пока нельзя добавить, слишком много рыбок");
         }
 
         public void Update()
